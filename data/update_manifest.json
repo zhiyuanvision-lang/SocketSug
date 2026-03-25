@@ -1,0 +1,123 @@
+{
+  "version": "1.0",
+  "last_full_refresh": "2026-03-26",
+  "pool_file": "sockets/data/stock_pool.json",
+  "refresh_policy": {
+    "market_context": {
+      "fields": {
+        "hang_seng_tech.pe_percentile_since_inception": {
+          "ttl_days": 1,
+          "priority": "high",
+          "reason": "决定全市场南向资金门槛"
+        },
+        "southbound_market_flow.month_to_date_net_buy_hkd_billion": {
+          "ttl_days": 1,
+          "priority": "high",
+          "reason": "决定前置过滤2是否通过"
+        },
+        "southbound_market_flow.today_net_buy_hkd_billion": {
+          "ttl_days": 1,
+          "priority": "medium",
+          "reason": "用于最新背景校验"
+        }
+      }
+    },
+    "stock_fields": {
+      "current_price_hkd": {
+        "ttl_days": 1,
+        "priority": "high"
+      },
+      "high_52w_hkd": {
+        "ttl_days": 20,
+        "priority": "medium"
+      },
+      "low_52w_hkd": {
+        "ttl_days": 20,
+        "priority": "medium"
+      },
+      "pe_ttm": {
+        "ttl_days": 5,
+        "priority": "medium"
+      },
+      "valuation_percentile_5y": {
+        "ttl_days": 20,
+        "priority": "high"
+      },
+      "southbound_net_buy_20d_hkd_billion": {
+        "ttl_days": 1,
+        "priority": "high"
+      },
+      "southbound_net_buy_50d_hkd_billion": {
+        "ttl_days": 1,
+        "priority": "high"
+      },
+      "southbound_turnover_ratio_5d": {
+        "ttl_days": 5,
+        "priority": "medium"
+      },
+      "southbound_holding_ratio": {
+        "ttl_days": 5,
+        "priority": "medium"
+      },
+      "buy_weeks_in_10w": {
+        "ttl_days": 5,
+        "priority": "high"
+      },
+      "three_month_has_single_day_gain_ge_10pct": {
+        "ttl_days": 5,
+        "priority": "high"
+      },
+      "three_month_accumulated_gain_gt_15pct": {
+        "ttl_days": 5,
+        "priority": "high"
+      }
+    }
+  },
+  "incremental_update_order": [
+    "先读取 stock_pool.json，确保推荐范围覆盖整个港股科技股票池",
+    "先更新 market_context.json 中的恒生科技PE分位和南向累计净买入",
+    "再更新 stocks_snapshot.json 中状态为 candidate 和 watchlist 的股票",
+    "对股票池中尚未建立快照的股票，先补齐基础行情字段",
+    "只搜索 missing_fields 中的字段，或者 ttl 已过期的字段",
+    "若某股票已被明确排除且非用户要求复核，则不优先刷新"
+  ],
+  "priority_symbols": [
+    "09988.HK",
+    "00700.HK",
+    "01024.HK",
+    "01810.HK",
+    "03690.HK",
+    "09618.HK",
+    "09888.HK",
+    "00981.HK"
+  ],
+  "queries_for_incremental_updates": {
+    "market": [
+      "最新 恒生科技指数 PE 分位",
+      "最新 3月以来 南向资金 累计净买入"
+    ],
+    "stocks": {
+      "09988.HK": [
+        "最新 阿里巴巴-W 当前股价 52周高低 PE",
+        "最新 阿里巴巴-W 南向资金 近20日 近50日 净买入",
+        "最新 阿里巴巴-W 南向持股比例 南向成交占比",
+        "近3个月 阿里巴巴-W 单日涨幅 >=10% 或 累积涨幅 >15%"
+      ],
+      "00700.HK": [
+        "最新 腾讯控股 当前股价 52周高低 PE",
+        "最新 腾讯控股 南向资金 近20日 近50日 净买入",
+        "最新 腾讯控股 南向持股比例 南向成交占比"
+      ],
+      "01024.HK": [
+        "最新 快手-W 当前股价 52周高低 PE",
+        "最新 快手-W 南向资金 近20日 近50日 净买入",
+        "最新 快手-W 南向持股比例 南向成交占比"
+      ],
+      "01810.HK": [
+        "最新 小米集团-W 当前股价 52周高低 PE",
+        "最新 小米集团-W 南向资金 近20日 近50日 净买入",
+        "最新 小米集团-W 估值分位"
+      ]
+    }
+  }
+}

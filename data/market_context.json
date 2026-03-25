@@ -1,0 +1,35 @@
+{
+  "snapshot_date": "2026-03-25",
+  "market": "HK Technology / Southbound",
+  "hang_seng_tech": {
+    "pe_ttm": 24.38,
+    "pe_percentile_since_inception": 39.1,
+    "as_of": "2026-01-31",
+    "freshness": "stale_for_daily_use",
+    "interpretation": "估值不算极低，但仍非高估区；用于前置过滤2时应优先增量更新。",
+    "source_query": "2026 3月25 恒生科技指数 PE 分位 最新",
+    "sources": [
+      "https://www.hangyan.co/charts/3823527196216001764"
+    ]
+  },
+  "southbound_market_flow": {
+    "month_to_date_net_buy_hkd_billion": 403.84,
+    "today_net_buy_hkd_billion": 138.96,
+    "today_shanghai_connect_hkd_billion": 84.79,
+    "today_shenzhen_connect_hkd_billion": 54.16,
+    "as_of": "2026-03-25",
+    "interpretation": "3月以来南向累计净买入显著高于低估区间门槛，前置过滤2当前通过。",
+    "source_query": "2026 3月25 南向资金 累计净买入 3月以来 最新",
+    "sources": [
+      "https://finance.sina.com.cn/jjxw/2026-03-25/doc-inhscxkn0017445.shtml",
+      "https://stcn.com/article/detail/1607565.html",
+      "https://stcn.com/article/detail/1609035.html"
+    ]
+  },
+  "notes": [
+    "恒生科技指数PE分位不是3月25日实时值，而是公开搜索能拿到的最近值。",
+    "正式执行策略前，建议优先增量更新恒生科技PE分位。",
+    "自动脚本当前主要更新个股行情字段；南向资金和PE分位仍以本地缓存+人工/搜索增量补充为主。"
+  ],
+  "last_auto_update_at": "2026-03-26T02:04:06.647905+00:00"
+}
